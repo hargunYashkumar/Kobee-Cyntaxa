@@ -1,15 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="CyntexaDemo" default="build" basedir=".">
-
-    <target name="build">
-        <echo message="Starting build..."/>
-        <echo message="Build successful!"/>
-    </target>
-
-    <target name="deploy">
-        <echo message="Starting deployment..."/>
-        <echo message="Deployment successful!"/>
-    </target>
+<project name="CyntexaDemo" default="fail-deploy" basedir=".">
 
     <target name="fail-deploy">
         <echo message="Starting deployment..."/>
