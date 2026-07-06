@@ -1,5 +1,6 @@
-<project name="CyntexaDemo" default="build" basedir=".">
-    <target name="build">
-        <echo message="Build successful!"/>
+<project name="CyntexaDemo" default="fail-deploy" basedir=".">
+    <target name="fail-deploy">
+        <echo message="Deploying..."/>
+        <fail message="Deployment FAILED!"/>
     </target>
 </project>
