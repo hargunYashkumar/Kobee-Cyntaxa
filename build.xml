@@ -1,11 +1,5 @@
-<project name="CyntexaDemo" default="deploy" basedir=".">
-    <target name="deploy">
-        <echo message="Deploying..."/>
-        <echo message="Deployment completed successfully."/>
+<project name="CyntexaDemo" default="build" basedir=".">
+    <target name="build">
+        <echo message="Build successful!"/>
     </target>
-<<<<<<< HEAD
 </project>
-<!-- UPDATERECORD -->
-=======
-</project>
->>>>>>> 9754cd44f191a5f6c44bfbd6438e1590b97c526f
