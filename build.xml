@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="CyntexaDemo-Git" default="main" basedir=".">
 
-    <!-- Debug and Validation Target -->
+    <!-- Force Ant to load Kobee's generated property file -->
+    <property file="alm_ant.properties" />
+
     <target name="check-params">
         <echo message="=================================================="/>
-        <echo message="[DEBUG] Received build.version = '${build.version}'"/>
+        <echo message="[DEBUG] Raw build.version value = '${build.version}'"/>
         <echo message="=================================================="/>
 
         <condition property="invalidParameter">
             <or>
+                <!-- Match default string or substring (handles trailing spaces) -->
                 <equals arg1="${build.version}" arg2="MUST_OVERRIDE" />
+                <contains string="${build.version}" substring="MUST_OVERRIDE" />
+                <!-- Match unassigned literal -->
                 <equals arg1="${build.version}" arg2="$${build.version}" />
+                <!-- Property missing completely -->
                 <not>
                     <isset property="build.version" />
                 </not>
@@ -20,17 +26,16 @@
         <fail if="invalidParameter" message="ERROR: The 'build.version' parameter was NOT provided or overridden in the API request payload!" />
     </target>
 
-    <!-- Execution Targets mapped to validation -->
     <target name="main" depends="check-params">
-        <echo message="[GIT BUILD] Parameter validation passed! build.version = ${build.version}"/>
+        <echo message="[GIT BUILD] Validation passed! build.version = ${build.version}"/>
     </target>
 
     <target name="build" depends="check-params">
-        <echo message="[GIT BUILD] Parameter validation passed! build.version = ${build.version}"/>
+        <echo message="[GIT BUILD] Validation passed! build.version = ${build.version}"/>
     </target>
 
     <target name="compile" depends="check-params">
-        <echo message="[GIT BUILD] Parameter validation passed! build.version = ${build.version}"/>
+        <echo message="[GIT BUILD] Validation passed! build.version = ${build.version}"/>
     </target>
 
 </project>
