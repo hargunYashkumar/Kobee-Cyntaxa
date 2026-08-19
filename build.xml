@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="CyntexaDemo-Git" default="main" basedir=".">
 
-    <!-- Target to validate API/Environment parameters -->
+    <!-- Validation target -->
     <target name="check-params">
         <condition property="invalidParameter">
             <or>
-                <!-- Fails if parameter equals Kobee's default 'MUST_OVERRIDE' -->
                 <equals arg1="${build.version}" arg2="MUST_OVERRIDE" />
-                <!-- Fails if parameter was not set and evaluates to literal '${build.version}' -->
                 <equals arg1="${build.version}" arg2="$${build.version}" />
-                <!-- Fails if property is not defined -->
                 <not>
                     <isset property="build.version" />
                 </not>
@@ -19,13 +16,17 @@
         <fail if="invalidParameter" message="ERROR: The 'build.version' parameter was NOT provided or overridden in the API request payload!" />
     </target>
 
-    <!-- Main target executed by Kobee -->
-    <target name="main" depends="check-params" description="Git Package Build Target">
-        <echo message="=================================================="/>
-        <echo message="[GIT BUILD] Parameter validation passed!"/>
-        <echo message="[GIT BUILD] build.version = ${build.version}"/>
-        <echo message="[GIT BUILD] Kobee ITS integration active."/>
-        <echo message="=================================================="/>
+    <!-- Map all common targets to run check-params -->
+    <target name="main" depends="check-params">
+        <echo message="[GIT BUILD] Parameter validation passed! build.version = ${build.version}"/>
+    </target>
+
+    <target name="build" depends="check-params">
+        <echo message="[GIT BUILD] Parameter validation passed! build.version = ${build.version}"/>
+    </target>
+
+    <target name="compile" depends="check-params">
+        <echo message="[GIT BUILD] Parameter validation passed! build.version = ${build.version}"/>
     </target>
 
 </project>
