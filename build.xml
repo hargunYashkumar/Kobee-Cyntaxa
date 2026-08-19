@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="CyntexaDemo" default="failure" basedir=".">
+<project name="CyntexaDemo" default="main" basedir=".">
     
-    <target name="failure" description="Main build target for CyntexaDemo">
-        <echo message="failure successful! Kobee ITS integration active."/>
+    <!-- Target to check if the parameter is passed from Kobee -->
+    <target name="check-params">
+        <fail unless="build.version" message="ERROR: The required parameter 'build.version' was NOT provided via Kobee API!" />
+    </target>
+
+    <!-- Main target that depends on the check-params target -->
+    <target name="main" depends="check-params" description="Main build target for CyntexaDemo">
+        <echo message="Success! The parameter build.version is set to: ${build.version}"/>
+        <echo message="Kobee ITS integration active."/>
     </target>
 
 </project>
