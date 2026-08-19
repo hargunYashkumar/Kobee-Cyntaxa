@@ -1,19 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="CyntexaDemo" default="main" basedir=".">
-    
+<project name="CyntexaDemo-Git" default="main" basedir=".">
+
+    <!-- Target to validate API/Environment parameters -->
     <target name="check-params">
-        <!-- Check if the value is still the default Kobee value -->
-        <condition property="parameterNotProvided">
-            <equals arg1="${build.version}" arg2="MUST_OVERRIDE" />
+        <condition property="invalidParameter">
+            <or>
+                <!-- Fails if parameter equals Kobee's default 'MUST_OVERRIDE' -->
+                <equals arg1="${build.version}" arg2="MUST_OVERRIDE" />
+                <!-- Fails if parameter was not set and evaluates to literal '${build.version}' -->
+                <equals arg1="${build.version}" arg2="$${build.version}" />
+                <!-- Fails if property is not defined -->
+                <not>
+                    <isset property="build.version" />
+                </not>
+            </or>
         </condition>
-        
-        <!-- Fail the build if the condition is true -->
-        <fail if="parameterNotProvided" message="ERROR: The 'build.version' parameter was NOT provided in the API request payload!" />
+
+        <fail if="invalidParameter" message="ERROR: The 'build.version' parameter was NOT provided or overridden in the API request payload!" />
     </target>
 
-    <target name="main" depends="check-params" description="Main build target">
-        <echo message="Success! The parameter build.version is successfully overridden to: ${build.version}"/>
-        <echo message="Kobee ITS integration active."/>
+    <!-- Main target executed by Kobee -->
+    <target name="main" depends="check-params" description="Git Package Build Target">
+        <echo message="=================================================="/>
+        <echo message="[GIT BUILD] Parameter validation passed!"/>
+        <echo message="[GIT BUILD] build.version = ${build.version}"/>
+        <echo message="[GIT BUILD] Kobee ITS integration active."/>
+        <echo message="=================================================="/>
     </target>
 
 </project>
