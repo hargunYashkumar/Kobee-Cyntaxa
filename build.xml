@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="CyntexaDemo-Git" default="main" basedir=".">
 
-    <!-- Force Ant to load Kobee's generated property file -->
+
     <property file="alm_ant.properties" />
 
     <target name="check-params">
