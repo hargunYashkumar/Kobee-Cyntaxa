@@ -16,7 +16,7 @@
                 <contains string="${build.version}" substring="MUST_OVERRIDE" />
                 <!-- Match unassigned literal -->
                 <equals arg1="${build.version}" arg2="$${build.version}" />
-                <!-- Property missing completely -->
+                <!-- Property missing completely     ,,,  -->
                 <not>
                     <isset property="build.version" />
                 </not>
